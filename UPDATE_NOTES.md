@@ -1,55 +1,52 @@
-# Update — Cable/Busbar/Combiner Sizing + Share Backup
+# Update — Real Tiger Empire Logo + Customizable Company Logo Feature
 
-## What's in this update
-Only **2 files changed** in your existing repo — no rebuild needed:
-- `index.html` — replace your current one with this
-- `service-worker.js` — replace your current one with this
+## Files changed — replace all of these in your repo
+- `index.html`
+- `service-worker.js`
+- `icon-192.png`
+- `icon-512.png`
+- `icon-maskable-192.png`
+- `icon-maskable-512.png`
+- `apple-touch-icon.png`
+- `favicon.png`
+- `favicon-32.png`
 
-Everything else (manifest.json, icons) stays exactly as it was.
+Nothing else needs to change — `manifest.json` stays exactly as it is (same filenames).
 
 ## How to apply it
-1. Go to your GitHub repo (`TigerEmpire_Solar_Designer_PWA.zip` — or whatever you named it).
-2. Open `index.html` in the repo, click the pencil (edit) icon, delete everything, paste in
-   the new `index.html` content (or just drag-and-drop upload to overwrite — GitHub lets you
-   drop a file with the same name and it replaces it).
-3. Do the same for `service-worker.js`.
-4. Commit both changes.
-5. On your phone: open the installed app, then **fully close it** (swipe it away from recent
-   apps) and reopen it once. The new service worker is set to fetch the latest version as soon
-   as you're online, so this should be picked up on the very next open — but a full close/reopen
-   guarantees it.
+1. In your GitHub repo, upload/drag these files in — same filenames, so they overwrite what's
+   already there.
+2. Commit.
+3. On your phone: fully close the installed app (swipe away from recent apps) and reopen once,
+   so the updated service worker + new icons take effect.
+4. If your phone's home screen still shows the old icon after that, you may need to remove the
+   installed app and reinstall from the site once — Android sometimes caches the home-screen
+   icon itself even after the underlying file changes.
 
 ## What's new
 
-### 1. Cable, DC Busbar & Combiner Box sizing (Electrical Design page)
-Cable sizing is now split into the three real segments of a system instead of one generic
-number, each with its own editable run length:
-- **PV Array → Combiner/Inverter (DC)** — sized off the string current
-- **Battery/Combiner → Inverter (DC)** — sized off actual DC-side current at your battery voltage
-- **Inverter → AC Distribution/Load** — same as before
+### 1. Your real logo is now built into the app icons
+The home-screen icon, splash/status-bar icon, and browser tab icon are now your actual Tiger
+Empire tiger-head mark instead of the placeholder sun-and-panel icon. Since these are baked
+into files (not something the app can generate itself), this required regenerating each size
+from your uploaded logo:
+- Standard icons (192px/512px) — full logo
+- "Maskable" icons — logo with extra padding so Android's circular/rounded icon shapes don't
+  crop the tiger's ears or the "EMPIRE" text
+- Favicon — tightly cropped to just the tiger-head badge, since the full logo with text isn't
+  legible at 32px
 
-Plus a new **DC Busbars & PV Combiner Boxes** card that tells you:
-- How many combiner boxes you need, based on PV string count vs. available MPPT inputs
-  (configurable "strings per combiner box")
-- Whether a DC busbar is worth using, and what current rating to look for, based on how many
-  batteries/inverters are being paralleled
+### 2. Company Logo upload — the actual customizable feature
+This is the reusable part: **Settings → Company Profile** now has an "Upload Logo" control.
+Any image you pick is automatically resized/compressed in the browser before saving, so it
+won't bloat storage regardless of the original file size. Once uploaded, the logo shows up in:
+- The sidebar, next to your company name
+- The letterhead of every generated PDF proposal
 
-All of this also now shows up in the generated PDF proposal (Section 8).
+This is what makes the app genuinely white-label-able per business — for a different client,
+you (or they) just upload their logo in Settings and it flows through automatically, no code
+changes needed. Your Tiger Empire logo is now the default, proving it works end-to-end.
 
-### 2. Share Backup (lighter alternative to full Google account sync)
-No Google sign-in required for this part. When you're back online after using the app offline,
-a banner appears: **"You're back online — want to back up your data?"** Tapping **Share Backup**
-opens your phone's native share sheet — same one you get sharing a photo — so you (or a beta
-tester) can send the backup straight to Gmail, Google Drive, WhatsApp, Files, or anywhere else,
-in one tap. There's also a manual **Share Backup** button in Settings for anytime use.
-
-Restoring is the same as before: open the shared/downloaded file and use **Import All Data**
-in Settings.
-
-This is intentionally the "light" version — it needs a tap, it's not silent background sync.
-The fuller version (auto sync via Google Drive, no tapping required) is still on the table
-whenever you're ready to do the one-time Google Cloud Console setup.
-
-## Note on old saved projects
-Existing projects on your phone are unaffected — this update only adds new fields (cable
-segment lengths, combiner box capacity) with sensible defaults; nothing is deleted or reset.
+## Note on existing data
+This update doesn't touch project data, prices, or any calculations — existing projects are
+unaffected.
